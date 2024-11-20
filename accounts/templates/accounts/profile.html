@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Welcome, {{ user.username }}!</h2>
+<p>Email: {{ user.email }}</p>
+<p>Bio: {{ user.bio }}</p>
+
+{% if user.avatar %}
+  <img src="{{ user.avatar.url }}" alt="Avatar">
+{% else %}
+<p>No avatar uploaded</p>
+{% endif %}
+
+<h2>Update your profile</h2>
+<form action="" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <fieldset>
+    <legend>Profile Information</legend>
+    <p>
+      <label for="id_username">Username:</label>
+      {{ user_form.username }}
+    </p>
+    <p>
+      <label for="id_email">Email:</label>
+     {{ user_form.email }}
+    </p>
+    <p>
+      <label for="id_avatar">Avatar:</label>
+      {{ user_form.avatar }}
+    </p>
+    <p>
+      <label for="id_bio">Bio:</label>
+      {{ user_form.bio }}
+    </p>
+    <p>
+      <label for="id_phone">phone</label>
+      {{ user_form.phone }}
+    </p>
+  </fieldset>
+  <fieldset>
+    <legend>Change Password</legend>
+    {{ password_form.as_p }}
+  </fieldset>
+  
+  <button type="submit">Save Changes</button>
+</form>
+{% endblock %}
